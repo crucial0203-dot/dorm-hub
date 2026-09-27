@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FAF9F6">
+<meta name="description" content="游戏小屋 - 寝室一起玩：P2P 联机卡牌「骗子博弈」与真·国粹四人麻将，纯静态零部署">
+<title>游戏小屋 · 寝室运营一本通</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  .hub-hero { margin-bottom: 40px; }
+  .hub-hero h1 {
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: .02em;
+    margin: 6px 0 10px;
+  }
+  .hub-hero p { margin: 0; color: var(--ink-2); font-size: 14.5px; max-width: 560px; }
+
+  .game-list { display: flex; flex-direction: column; gap: 16px; }
+  .game-card {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .game-card:hover { border-color: var(--line-strong); box-shadow: 0 2px 4px rgba(28,25,23,.05), 0 16px 40px rgba(28,25,23,.06); }
+  .game-card .glyph {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .game-card .glyph svg { width: 26px; height: 26px; }
+  .game-card .main { flex: 1; min-width: 0; }
+  .game-card h2 { margin: 0 0 6px; font-size: 17px; font-weight: 600; letter-spacing: .01em; }
+  .game-card .sub { color: var(--ink-2); font-size: 13.5px; line-height: 1.7; margin: 0 0 12px; }
+  .game-card .go {
+    flex: none;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .hub-note {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .hub-note h3 { margin: 0 0 12px; font-size: 15px; font-weight: 600; }
+  .hub-note ol, .hub-note ul { margin: 0; padding-left: 20px; line-height: 2; color: var(--ink-2); font-size: 13.5px; }
+  .hub-note code {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12.5px;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    border-radius: 5px;
+    padding: 1px 6px;
+  }
+  .hub-note .muted { line-height: 1.8; }
+
+  @media (min-width: 900px) {
+    .hub-note { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .game-card { padding: 20px; gap: 14px; }
+    .game-card .go { display: none; }
+    .hub-hero h1 { font-size: 24px; }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">DormHub</span>
+    <a href="../" style="font-size:17px;font-weight:500;color:var(--ink);text-decoration:none;">游戏小屋</a>
+  </div>
+  <div class="top-actions">
+    <a class="btn" href="../">回到一本通</a>
+  </div>
+</header>
+
+<main>
+  <div class="hub-hero">
+    <span class="eyebrow">Game Room</span>
+    <h1>四局好游戏，一组寝室开黑</h1>
+    <p>全部纯静态、无服务器、无账号：麻将由内置 AI 对战，骗子博弈与狼人杀走浏览器 MQTT 中继，三国杀（开源无名杀）单机随处可玩、联机由房主开服 + 加密隧道。</p>
+  </div>
+
+  <div class="game-list">
+    <a class="game-card" href="./werewolf/" target="_blank" rel="noopener">
+      <div class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 9c0-3 3-5 8-5s8 2 8 5c0 6-3 11-8 13C7 20 4 15 4 9z"/>
+          <path d="M9 11h.01M15 11h.01M10 15c1 .8 3 .8 4 0"/>
+        </svg>
+      </div>
+      <div class="main">
+        <h2>狼人杀 · 完整规则联机</h2>
+        <p class="sub">预女猎守 9 / 12 人板，警徽竞选、夜序技能、白天文字讨论与放逐投票。房主权威同步，房间号 + 分享链即可开局。</p>
+        <div class="tag-row">
+          <span class="sticker orange">文字联机</span>
+          <span class="sticker">9–12 人</span>
+          <span class="sticker">约 30–60 分钟</span>
+        </div>
+      </div>
+      <span class="go">开局 →</span>
+    </a>
+
+    <a class="game-card" href="./liars-gambit/" target="_blank" rel="noopener">
+      <div class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2.5" y="5" width="12" height="16" rx="2"/>
+          <path d="M8 2.5h9A2.5 2.5 0 0 1 19.5 5v14"/>
+          <path d="M6.2 10.5h4.6M8.5 8.2v4.6"/>
+        </svg>
+      </div>
+      <div class="main">
+        <h2>骗子博弈 · Liar's Gambit</h2>
+        <p class="sub">每个玩家轮流"骗"庄家：你出的牌到底是不是指定的数字？质疑对了收走牌池，错了自己背锅。先清空手牌的人赢。房间号 + 二维码，扫码即入局。</p>
+        <div class="tag-row">
+          <span class="sticker orange">P2P 实时联机</span>
+          <span class="sticker">3–9 人</span>
+          <span class="sticker">断线自动迁移房主</span>
+          <span class="sticker">10–30 分钟一局</span>
+        </div>
+      </div>
+      <span class="go">开局 →</span>
+    </a>
+
+    <a class="game-card" href="./sanguosha/" target="_blank" rel="noopener">
+      <div class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 4h14v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4z"/>
+          <path d="M9 8h6M9 11.5h6M9 15h3"/>
+        </svg>
+      </div>
+      <div class="main">
+        <h2>三国杀 · 无名杀</h2>
+        <p class="sub">开源无名杀完整版：全武将包、身份局、国战与丰富模式。单机对 AI 随时开局；联机时房主在本机开服，把 wss 地址填进联机大厅即可同寝开黑。</p>
+        <div class="tag-row">
+          <span class="sticker orange">联机 1–8 人</span>
+          <span class="sticker">单机 AI</span>
+          <span class="sticker">身份局 / 国战</span>
+        </div>
+      </div>
+      <span class="go">开局 →</span>
+    </a>
+
+    <a class="game-card" href="./mahjong/" target="_blank" rel="noopener">
+      <div class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3.5" y="3.5" width="7.4" height="10.5" rx="1.4"/>
+          <rect x="13.1" y="10" width="7.4" height="10.5" rx="1.4"/>
+          <path d="M7.2 6.5v4.5M5.6 8h3.2"/>
+          <circle cx="16.8" cy="13.6" r="0.9"/>
+          <circle cx="16.8" cy="16.9" r="0.9"/>
+        </svg>
+      </div>
+      <div class="main">
+        <h2>中国古典四人麻将</h2>
+        <p class="sub">"四人围着桌子"的真·国粹：摸牌、吃碰杠、胡牌算番，自带番种表（清一色、混一色、对对胡、十三幺…）。纯前端 AI 对手，单人即可开桌。</p>
+        <div class="tag-row">
+          <span class="sticker orange">1 人 + 3 AI</span>
+          <span class="sticker">中国古典 / 广东规则</span>
+          <span class="sticker">纯静态 · 零部署</span>
+        </div>
+      </div>
+      <span class="go">上桌 →</span>
+    </a>
+  </div>
+
+  <div class="hub-note">
+    <div class="card">
+      <h3>三步开局（30 秒）</h3>
+      <ol>
+        <li><b>房主</b>进入 <a href="./liars-gambit/" target="_blank" rel="noopener">骗子博弈</a> → 输入昵称 → 点「创建房间」。</li>
+        <li>房主把房间页中央的<b>4 位房间号</b>（或二维码）发到寝室群 / 微信。</li>
+        <li><b>舍友</b>打开同一链接 → 输入房间号 + 昵称 → 「加入」。≥3 人即可开局，中途加入也算一员。</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>连不上？三招排查</h3>
+      <ol>
+        <li><b>同一 WiFi / 热点</b> → 99% 直连成功，寝室场景首选。</li>
+        <li><b>异地 / 校园网</b> → 本站默认已启用 TURN 中继与 Cloudflare STUN；仍不通时可在牌局页底部注入自定义 TURN（公共 OpenRelay 免注册，详见 <a href="./liars-gambit/NETWORK.md" target="_blank" rel="noopener">NETWORK.md</a>）。</li>
+        <li><b>微信内置浏览器</b>可能屏蔽 WebRTC → 复制链接到 Chrome / Safari / Edge 打开。</li>
+      </ol>
+      <p class="warn">对局中请避免熄屏 / 切后台，否则 WebRTC 连接会中断；房主断线会自动迁移给下家，同名重进可恢复对局。</p>
+    </div>
+
+    <div class="card" style="grid-column:1/-1">
+      <h3>关于</h3>
+      <p class="muted">骗子博弈来自开源仓库 <a href="https://github.com/lu123bing/liars-gambit" target="_blank" rel="noopener">lu123bing/liars-gambit</a>，由寝室运营一本通集成；麻将基于 Pomax 的开源实现。三国杀基于开源项目「无名杀 noname」（GPL-3.0，github.com/libccy/noname）静态化集成，联机使用其官方服务端。所有通信走浏览器 P2P（WebRTC + PeerJS），没有服务器、没有账号，数据只在你和舍友的设备之间流动。</p>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <span>游戏小屋 · 数据只在你和舍友的浏览器之间流动</span>
+</footer>
+
+</body>
+</html>

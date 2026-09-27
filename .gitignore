@@ -1,0 +1,7 @@
+﻿.openclaw-backup/
+Thumbs.db
+.DS_Store
+_verify/_cdn_*.html
+_verify/_cdn_*.css
+_verify/cdp-profile/
+_deploy-staging/

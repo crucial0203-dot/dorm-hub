@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0F1419">
+<meta name="description" content="狼人杀联机房 · 预女猎守 9/12 人 · 文字发言计时 · 纯静态 MQTT">
+<meta name="asset-version" content="2026.09.24.1">
+<title>狼人杀 · 游戏小屋</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="./styles.css?v=2026.09.24.1">
+</head>
+<body class="ww-body">
+
+<header class="topbar ww-topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">DormHub</span>
+    <a href="../" style="font-size:17px;font-weight:500;color:inherit;text-decoration:none;">狼人杀</a>
+  </div>
+  <div class="top-actions">
+    <a class="btn" href="../">游戏小屋</a>
+  </div>
+</header>
+
+<section id="screen-home" class="screen active ww-screen">
+  <div class="ww-hero">
+    <span class="eyebrow">Werewolf</span>
+    <h1>狼人杀 · 完整规则联机</h1>
+    <p>预女猎守 9 / 12 人板，警徽竞选、文字讨论倒计时。房主权威同步，国内 broker 默认。</p>
+  </div>
+  <div class="ww-card">
+    <label class="ww-field">
+      <span>昵称</span>
+      <input id="input-name" maxlength="12" placeholder="怎么称呼你" autocomplete="off">
+    </label>
+    <button id="btn-create" class="ww-btn primary">创建房间</button>
+    <div class="ww-or">或加入已有房间</div>
+    <div class="ww-join-row">
+      <input id="input-room-code" maxlength="4" placeholder="4 位房间号" autocomplete="off" inputmode="numeric">
+      <button id="btn-join" class="ww-btn">加入</button>
+    </div>
+  </div>
+</section>
+
+<section id="screen-lobby" class="screen ww-screen">
+  <div class="ww-card wide">
+    <div class="ww-room-head">
+      <div>
+        <div class="ww-label">房间号</div>
+        <div class="ww-code" id="lobby-room-code">----</div>
+      </div>
+      <div class="ww-room-actions">
+        <button id="btn-share" class="ww-btn ghost">分享链接</button>
+      </div>
+    </div>
+    <div class="ww-label">玩家 <span id="lobby-player-count">0</span>/<span id="lobby-player-max">9</span></div>
+    <div id="lobby-player-list" class="ww-player-list"></div>
+    <div class="ww-label">板子</div>
+    <div class="ww-board-row">
+      <button id="board-9" class="ww-btn board selected" type="button">9 人 · 预女猎</button>
+      <button id="board-12" class="ww-btn board" type="button">12 人 · 含守卫</button>
+    </div>
+    <div class="ww-lobby-actions">
+      <button id="btn-start" class="ww-btn primary hidden">开始游戏</button>
+      <button id="btn-leave" class="ww-btn danger">离开</button>
+    </div>
+    <p class="ww-muted">满员后由房主点开始。开局后锁房；分享链接带 <code>?room=&amp;broker=</code>。</p>
+  </div>
+</section>
+
+<section id="screen-game" class="screen ww-screen">
+  <div class="ww-game-top">
+    <div>
+      <span class="ww-phase" id="phase-label">—</span>
+      <span class="ww-day" id="day-label">夜晚</span>
+      <span class="ww-clock" id="phase-clock"></span>
+    </div>
+    <div class="ww-me">
+      <span class="role-badge" id="my-role">—</span>
+      <button id="btn-leave" class="ww-btn ghost sm">离开</button>
+    </div>
+  </div>
+  <div class="ww-muted" id="priv-note"></div>
+  <div id="game-over" class="ww-game-over hidden"></div>
+
+  <div class="ww-grid">
+    <div class="ww-col">
+      <div class="ww-label">座位</div>
+      <div id="seat-grid" class="seat-grid"></div>
+      <div class="ww-label">操作</div>
+      <div id="action-panel" class="action-panel"></div>
+      <div class="ww-label">系统</div>
+      <div id="system-log" class="system-log"></div>
+    </div>
+    <div class="ww-col chat-col">
+      <div class="ww-label">聊天</div>
+      <div id="chat-log" class="chat-log"></div>
+      <div class="ww-chat-row">
+        <input id="input-chat" placeholder="说点什么…" maxlength="200" autocomplete="off">
+        <button id="btn-send-chat" class="ww-btn sm">发送</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="toast" class="ww-toast" role="status" aria-live="polite"></div>
+
+<script src="./scripts/config.js?v=2026.09.24.1"></script>
+<script src="./scripts/mqtt-relay.js?v=2026.09.24.1"></script>
+<script src="./scripts/engine.js?v=2026.09.24.1"></script>
+<script src="./scripts/net.js?v=2026.09.24.1"></script>
+<script src="./scripts/app.js?v=2026.09.24.1"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF9F6">
+  <meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="寝室运营一本通 - 值日轮班 / 账单AA / 寝室公约 / 共享清单，舍友一起用的实用小站">
+<title>寝室运营一本通</title>
+<link rel="stylesheet" href="styles.css?v=2026.09.23.1">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">DormHub</span>
+    <input id="dorm-name" class="dorm-name" maxlength="16" placeholder="点我取名（如 223 寝室）" title="点击修改寝室名">
+  </div>
+  <div class="top-actions">
+    <a class="btn btn-game" href="./game/" title="进入游戏小屋（含 P2P 联机牌局）">游戏</a>
+    <button class="btn" data-action="export" title="导出为 JSON 备份文件">导出</button>
+    <button class="btn" data-action="import" title="从文件或粘贴文本导入">导入</button>
+    <button class="btn" data-action="share" title="生成分享链接（小数据）">分享</button>
+    <button class="btn btn-danger" data-action="reset" title="清空全部数据">重置</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs" aria-label="功能导航">
+  <button class="tab active" data-tab="home">首页</button>
+  <button class="tab" data-tab="duty">值日</button>
+  <button class="tab" data-tab="bill">账单</button>
+  <button class="tab" data-tab="rule">公约</button>
+  <button class="tab" data-tab="share">共享</button>
+</nav>
+
+<main>
+  <section id="view-home" class="view"></section>
+  <section id="view-duty" class="view hidden"></section>
+  <section id="view-bill" class="view hidden"></section>
+  <section id="view-rule" class="view hidden"></section>
+  <section id="view-share" class="view hidden"></section>
+</main>
+
+<footer class="foot">
+  <span>数据只存在本机浏览器 · 建议定期「导出」备份</span>
+  <button class="linklike" data-action="opensync">同步说明</button>
+</footer>
+
+<input type="file" id="import-file" accept=".json,application/json" class="hidden">
+
+<dialog id="import-dialog">
+  <form method="dialog" class="dialog-form">
+    <h3>导入数据</h3>
+    <p class="muted">导入会<b>覆盖</b>当前本机的全部数据。两种方式任选：</p>
+    <label class="row">
+      <span>① 选文件：</span>
+      <button type="button" class="btn" data-action="pickfile">选择 .json 备份</button>
+    </label>
+    <label class="row">
+      <span>② 粘贴文本：</span>
+      <textarea id="import-paste" rows="4" placeholder='粘贴导出的 JSON 或 #d= 分享文本…'></textarea>
+    </label>
+    <div class="dialog-btns">
+      <button class="btn" value="cancel">取消</button>
+      <button class="btn btn-primary" value="ok" data-action="doimport">导入</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="sync-dialog">
+  <form method="dialog" class="dialog-form">
+    <h3>同步说明</h3>
+    <div class="sync-body">
+      <p>这是<b>纯静态小站</b>：没有服务器、没有账号，数据只存在<b>你自己的浏览器</b>里。</p>
+      <p>每个舍友的浏览器各自存一份。要同步：</p>
+      <ol>
+        <li>在 A 手机点「导出」→ 得到备份文件；</li>
+        <li>把文件发给舍友（微信 / QQ 均可）；</li>
+        <li>舍友在 B 手机点「导入」选文件 → 数据一致。</li>
+      </ol>
+      <p>小数据（如只是值日表）可以用「分享」直接生成链接，点开即导入。</p>
+      <p class="warn">公开链接：本站发布后<i>任何拿到链接的人</i>都能看到页面上的数据（但改动只影响他自己的浏览器）。请不要放身份证号、成绩单等隐私信息。真正的"多人实时同步"需要后端服务，留给未来版本。</p>
+    </div>
+    <div class="dialog-btns">
+      <button class="btn btn-primary" value="ok">知道了</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* 麻将页移动端适配（2026-09-27，dorm-hub 集成层新增；不改上游任何规则） */
+@media (max-width: 820px) {
+  html {
+    background: var(--page-background);
+    overflow-x: hidden;
+  }
+  body {
+    width: auto;
+    padding: 8px 4px 1em;
+    overflow-x: hidden;
+  }
+  body > br {
+    display: none;
+  }
+  /* 英文项目文档区在手机上隐藏，游玩优先 */
+  #explanation,
+  #gameplay,
+  #rules,
+  #scoring,
+  #this-game,
+  #controls {
+    display: none;
+  }
+  /* 弹窗字号按缩放比例反向补偿（--mj-inv 由 mobile-fit.js 写入），保持可读 */
+  .modal .panel {
+    font-size: calc(1rem * var(--mj-inv, 1));
+    max-width: calc(94vw / var(--mj-scale, 1));
+  }
+  .modal .panel button {
+    white-space: normal;
+  }
+}
